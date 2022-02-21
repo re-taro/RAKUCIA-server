@@ -1,3 +1,38 @@
+# メンバー向け
+
+## 最初のステップ
+
+1. .env/を設定します
+2. 以下のコマンドを実行します
+
+```
+$ docker compose up -d
+$ docker ps
+$ docker logs {container_id} -f
+```
+
+3. データベースへ仮データを投入
+
+```
+$ docker compose exec database /bin/sh
+# mysql -u user -p
+# ここでパスワードを入力(default.envのDB_PASSWORD)
+
+# use app;
+# source /sql/user.sql
+```
+
+4. 2 回目以降は`docker compose up -d`のみで構いません
+
+## テスト
+
+```
+$ docker compose exec server /bin/sh
+
+# docker compose up -d の直後だと error が出る場合あり
+# yarn run test
+```
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
