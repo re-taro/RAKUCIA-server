@@ -12,6 +12,7 @@ type Food {
   created_at: DateTime!
   id: ID!
   image_url: String!
+  leave_flag: Int
   recipe_cost: String!
   recipe_indication: String!
   recipe_material: String!
@@ -26,5 +27,6 @@ type Mutation {
 }
 
 type Query {
+  createList(user_id: String!): [Food!]!
   foods: [Food!]!
 }

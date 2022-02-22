@@ -15,4 +15,6 @@ export class Food {
   updated_at: Date;
   @Field(() => Int, { nullable: true })
   add_to_list?: number;
+  @Field(() => Int, { nullable: true })
+  leave_flag?: number;
 }
