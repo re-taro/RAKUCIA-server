@@ -10,6 +10,7 @@ scalar DateTime
 type Food {
   add_to_list: Int
   created_at: DateTime!
+  id: ID!
   image_url: String!
   recipe_cost: String!
   recipe_indication: String!
