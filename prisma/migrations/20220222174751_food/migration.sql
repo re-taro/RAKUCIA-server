@@ -10,6 +10,7 @@ CREATE TABLE `Food` (
     `recipe_cost` VARCHAR(9) NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
+    `leave_flag` INTEGER NULL,
     `add_to_list` INTEGER NULL,
 
     PRIMARY KEY (`id`)
