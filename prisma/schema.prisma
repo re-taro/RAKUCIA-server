@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Food {
+  id                  Int              @id                  @default(autoincrement())
+  user_id             String           @db.VarChar(255)
+  recipe_title        String           @db.VarChar(255)
+  recipe_url          String           @db.VarChar(255)
+  image_url           String           @db.VarChar(255)
+  recipe_material     String           @db.VarChar(255)
+  recipe_indication   String           @db.VarChar(5)
+  recipe_cost         String           @db.VarChar(9)
+  created_at          DateTime         @default(now())
+  updated_at          DateTime         @updatedAt
+  add_to_list         Int?
+}
