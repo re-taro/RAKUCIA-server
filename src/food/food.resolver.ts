@@ -11,6 +11,11 @@ export class FoodResolver {
     return this.foodService.findAll();
   }
 
+  @Query(() => [Food], { name: 'createList' })
+  createList(@Args('user_id') user_id: string): Promise<Food[]> {
+    return this.foodService.createList(user_id);
+  }
+
   @Mutation(() => Food, { name: 'addFood' })
   addFood(
     @Args('user_id') user_id: string,

@@ -10,6 +10,14 @@ export class FoodService {
     return this.prisma.food.findMany();
   }
 
+  async createList(user_id: string): Promise<Food[]> {
+    return this.prisma.food.findMany({
+      where: {
+        user_id,
+      },
+    });
+  }
+
   async addFood(
     user_id: string,
     recipe_title: string,
