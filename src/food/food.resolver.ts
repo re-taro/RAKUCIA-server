@@ -45,4 +45,9 @@ export class FoodResolver {
   ): Promise<Food> {
     return this.foodService.updateFood(id, leave_flag, add_to_list);
   }
+
+  @Mutation(() => [Food], { name: 'deleteFood' })
+  deleteFood(@Args('user_id') user_id: string): Promise<Promise<Food>[]> {
+    return this.foodService.deleteFood(user_id);
+  }
 }

@@ -51,4 +51,21 @@ export class FoodService {
       },
     });
   }
+
+  async deleteFood(user_id: string): Promise<Promise<Food>[]> {
+    const food = await this.prisma.food.findMany({
+      where: {
+        user_id,
+      },
+    });
+    return food
+      .filter((food) => food.leave_flag === 0 && food.add_to_list === 0)
+      .map(async (food) => {
+        return await this.prisma.food.delete({
+          where: {
+            id: food.id,
+          },
+        });
+      });
+  }
 }
