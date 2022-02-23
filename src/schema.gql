@@ -15,10 +15,25 @@ type Food {
   user_id: String!
 }
 
+input FoodCreateInput {
+  image_url: String!
+  recipe_cost: String!
+  recipe_indication: String!
+  recipe_material: String!
+  recipe_title: String!
+  recipe_url: String!
+  user_id: String!
+}
+
+input FoodUpdateInput {
+  add_to_list: Int!
+  leave_flag: Int!
+}
+
 type Mutation {
-  addFood(image_url: String!, recipe_cost: String!, recipe_indication: String!, recipe_material: String!, recipe_title: String!, recipe_url: String!, user_id: String!): Food!
+  addFood(food_data: FoodCreateInput!): Food!
   deleteFood(user_id: String!): [Food!]!
-  updateFood(add_to_list: Float!, id: Float!, leave_flag: Float!): Food!
+  updateFood(id: Float!, update_data: FoodUpdateInput!): Food!
 }
 
 type Query {
