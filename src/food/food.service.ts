@@ -39,4 +39,16 @@ export class FoodService {
       },
     });
   }
+
+  async updateFood(id: number, leave_flag: number, add_to_list: number): Promise<Food> {
+    return this.prisma.food.update({
+      where: {
+        id,
+      },
+      data: {
+        leave_flag,
+        add_to_list,
+      },
+    });
+  }
 }

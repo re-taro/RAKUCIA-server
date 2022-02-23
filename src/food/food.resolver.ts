@@ -36,4 +36,13 @@ export class FoodResolver {
       recipe_cost,
     );
   }
+
+  @Mutation(() => Food, { name: 'updateFood' })
+  updateFood(
+    @Args('id') id: number,
+    @Args('leave_flag') leave_flag: number,
+    @Args('add_to_list') add_to_list: number,
+  ): Promise<Food> {
+    return this.foodService.updateFood(id, leave_flag, add_to_list);
+  }
 }

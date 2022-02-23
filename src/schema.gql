@@ -24,6 +24,7 @@ type Food {
 
 type Mutation {
   addFood(image_url: String!, recipe_cost: String!, recipe_indication: String!, recipe_material: String!, recipe_title: String!, recipe_url: String!, user_id: String!): Food!
+  updateFood(add_to_list: Float!, id: Float!, leave_flag: Float!): Food!
 }
 
 type Query {
