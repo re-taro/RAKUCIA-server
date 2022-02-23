@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Food } from './food.model';
+import { FoodCreateInput, FoodUpdateInput } from './food.input';
 
 @Injectable()
 export class FoodService {
@@ -18,37 +19,18 @@ export class FoodService {
     });
   }
 
-  async addFood(
-    user_id: string,
-    recipe_title: string,
-    recipe_url: string,
-    image_url: string,
-    recipe_material: string,
-    recipe_indication: string,
-    recipe_cost: string,
-  ): Promise<Food> {
+  async addFood(food_data: FoodCreateInput): Promise<Food> {
     return this.prisma.food.create({
-      data: {
-        user_id,
-        recipe_title,
-        recipe_url,
-        image_url,
-        recipe_material,
-        recipe_indication,
-        recipe_cost,
-      },
+      data: food_data,
     });
   }
 
-  async updateFood(id: number, leave_flag: number, add_to_list: number): Promise<Food> {
+  async updateFood(id: number, update_data: FoodUpdateInput): Promise<Food> {
     return this.prisma.food.update({
       where: {
         id,
       },
-      data: {
-        leave_flag,
-        add_to_list,
-      },
+      data: update_data,
     });
   }
 

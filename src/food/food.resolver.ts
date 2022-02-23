@@ -1,6 +1,7 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { Food } from './food.model';
 import { FoodService } from './food.service';
+import { FoodCreateInput, FoodUpdateInput } from './food.input';
 
 @Resolver()
 export class FoodResolver {
@@ -17,33 +18,13 @@ export class FoodResolver {
   }
 
   @Mutation(() => Food, { name: 'addFood' })
-  addFood(
-    @Args('user_id') user_id: string,
-    @Args('recipe_title') recipe_title: string,
-    @Args('recipe_url') recipe_url: string,
-    @Args('image_url') image_url: string,
-    @Args('recipe_material') recipe_material: string,
-    @Args('recipe_indication') recipe_indication: string,
-    @Args('recipe_cost') recipe_cost: string,
-  ): Promise<Food> {
-    return this.foodService.addFood(
-      user_id,
-      recipe_title,
-      recipe_url,
-      image_url,
-      recipe_material,
-      recipe_indication,
-      recipe_cost,
-    );
+  addFood(@Args('food_data') food_data: FoodCreateInput): Promise<Food> {
+    return this.foodService.addFood(food_data);
   }
 
   @Mutation(() => Food, { name: 'updateFood' })
-  updateFood(
-    @Args('id') id: number,
-    @Args('leave_flag') leave_flag: number,
-    @Args('add_to_list') add_to_list: number,
-  ): Promise<Food> {
-    return this.foodService.updateFood(id, leave_flag, add_to_list);
+  updateFood(@Args('id') id: number, @Args('update_data') update_data: FoodUpdateInput): Promise<Food> {
+    return this.foodService.updateFood(id, update_data);
   }
 
   @Mutation(() => [Food], { name: 'deleteFood' })
