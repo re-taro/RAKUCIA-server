@@ -2,14 +2,8 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type Food {
   add_to_list: Int
-  created_at: DateTime!
   id: ID!
   image_url: String!
   leave_flag: Int
@@ -18,7 +12,6 @@ type Food {
   recipe_material: String!
   recipe_title: String!
   recipe_url: String!
-  updated_at: DateTime!
   user_id: String!
 }
 
