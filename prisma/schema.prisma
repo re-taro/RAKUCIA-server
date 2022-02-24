@@ -21,5 +21,6 @@ model Food {
   recipe_cost         String           @db.VarChar(9)
   created_at          DateTime         @default(now())
   updated_at          DateTime         @updatedAt
+  leave_flag          Int?
   add_to_list         Int?
 }

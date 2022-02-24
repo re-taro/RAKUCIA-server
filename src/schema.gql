@@ -2,24 +2,41 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type Food {
   add_to_list: Int
-  created_at: DateTime!
+  id: ID!
+  image_url: String!
+  leave_flag: Int
+  recipe_cost: String!
+  recipe_indication: String!
+  recipe_material: String!
+  recipe_title: String!
+  recipe_url: String!
+  user_id: String!
+}
+
+input FoodCreateInput {
   image_url: String!
   recipe_cost: String!
   recipe_indication: String!
   recipe_material: String!
   recipe_title: String!
   recipe_url: String!
-  updated_at: DateTime!
   user_id: String!
 }
 
+input FoodUpdateInput {
+  add_to_list: Int!
+  leave_flag: Int!
+}
+
+type Mutation {
+  addFood(food_data: FoodCreateInput!): Food!
+  deleteFood(user_id: String!): [Food!]!
+  updateFood(id: Float!, update_data: FoodUpdateInput!): Food!
+}
+
 type Query {
+  createList(user_id: String!): [Food!]!
   foods: [Food!]!
 }
