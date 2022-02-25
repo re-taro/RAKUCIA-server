@@ -17,7 +17,7 @@ import { LinebotConfigService } from './linebot/linebot.config.service';
       isGlobal: true,
     }),
   ],
-  controllers: [LinebotController],
+  providers: [LinebotConfigService],
 })
 export class AppModule implements NestModule {
   constructor(readonly linebotConfigService: LinebotConfigService) {}
