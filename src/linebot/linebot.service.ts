@@ -66,7 +66,7 @@ export class LinebotService {
     ]);
   }
 
-  async apiRequest(id: string) {
+  async apiRequest(id: string): Promise<Food[]> {
     const res = await fetch(
       `https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&formatVersion=2&categoryId=${id}&applicationId=${this.configService.get<string>(
         'RAKUTEN_ID',
