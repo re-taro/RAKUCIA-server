@@ -14,6 +14,9 @@ export class LinebotController {
         case 'follow':
           this.linebotService.setRichMenu();
           break;
+        case 'postback':
+          this.linebotService.postBackHandler(event);
+          break;
         default:
           break;
       }
