@@ -12,6 +12,28 @@ export type chooseFoodCategory =
   | 'vegetable'
   | 'vermicelli';
 
+export type fetchData = {
+  result: fetchFood[];
+};
+
+export type fetchFood = {
+  foodImageUrl: string;
+  mediumImageUrl: string;
+  nickname: string;
+  pickup: number;
+  rank: string;
+  recipeCost: string;
+  recipeDescription: string;
+  recipeId: number;
+  recipeIndication: string;
+  recipeMaterial: string[];
+  recipePublishday: string;
+  recipeTitle: string;
+  recipeUrl: string;
+  shop: number;
+  smallImageUrl: string;
+};
+
 export function throwIdFromCategory(category: chooseFoodCategory) {
   switch (category) {
     case 'chicken':
