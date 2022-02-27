@@ -2,12 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { Client, FlexBubble, FlexMessage, PostbackEvent, MessageAPIResponseBase } from '@line/bot-sdk';
 import * as fs from 'fs';
 import { join } from 'path';
-import fetch from 'node-fetch';
+import axios from 'axios';
 import { ConfigService } from '@nestjs/config';
 import { LinebotConfigService } from './linebot.config.service';
 import { richMenu } from './linebot.data';
-import { Food } from '../food/food.model';
-import { chooseFoodCategory, throwIdFromCategory, throwNameFromCategory } from '../food/food.dto';
+import { chooseFoodCategory, throwIdFromCategory, throwNameFromCategory, fetchData } from '../food/food.dto';
+import { FoodCreateInput } from '../food/food.input';
 
 @Injectable()
 export class LinebotService {
@@ -36,7 +36,7 @@ export class LinebotService {
         break;
       case event.postback.data as chooseFoodCategory:
         const id = throwIdFromCategory(event.postback.data);
-        this.chooseFood(event.replyToken, id);
+        this.chooseFood(event.replyToken, id, event.source.userId);
         break;
       default:
         break;
@@ -48,15 +48,15 @@ export class LinebotService {
     return client.replyMessage(replyToken, [
       {
         type: 'text',
-        text: '食べ物のカテゴリーを選択してね',
+        text: 'カテゴリーを選択してね',
       },
       this.createChoiceMessage(foods),
     ]);
   }
 
-  async chooseFood(replyToken: string, id: string): Promise<MessageAPIResponseBase> {
+  async chooseFood(replyToken: string, id: string, user_id: string): Promise<MessageAPIResponseBase> {
     const client = new Client(this.linebotConfigService.createLinebotOptions());
-    const items = await this.apiRequest(id);
+    const items = await this.apiRequest(id, user_id);
     return client.replyMessage(replyToken, [
       {
         type: 'text',
@@ -66,13 +66,25 @@ export class LinebotService {
     ]);
   }
 
-  async apiRequest(id: string): Promise<Food[]> {
-    const res = await fetch(
-      `https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&formatVersion=2&categoryId=${id}&applicationId=${this.configService.get<string>(
-        'RAKUTEN_ID',
-      )}`,
-    );
-    return (await res.json()) as Food[];
+  async apiRequest(id: string, user_id: string): Promise<FoodCreateInput[]> {
+    const url = `https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&formatVersion=2&categoryId=${id}&applicationId=${this.configService.get<string>(
+      'RAKUTEN_ID',
+    )}`;
+    const data = await axios.get<fetchData>(url).then((res) => res.data);
+    const items = data.result;
+    const foods = items.map((item) => {
+      const result: FoodCreateInput = {
+        user_id: user_id,
+        recipe_title: item.recipeTitle,
+        recipe_url: item.recipeUrl,
+        image_url: item.foodImageUrl,
+        recipe_material: item.recipeMaterial.join(','),
+        recipe_indication: item.recipeIndication,
+        recipe_cost: item.recipeCost,
+      };
+      return result;
+    });
+    return foods;
   }
 
   async setRichMenu(): Promise<void> {
@@ -83,7 +95,7 @@ export class LinebotService {
     await client.createRichMenu(richMenu);
   }
 
-  createFoodMessage(items: Food[]): FlexMessage {
+  createFoodMessage(items: FoodCreateInput[]): FlexMessage {
     const flexMessage: FlexMessage = {
       type: 'flex',
       altText: '食べ物の一覧',
@@ -104,7 +116,7 @@ export class LinebotService {
     return flexMessage;
   }
 
-  createFoodBubble(item: Food): FlexBubble {
+  createFoodBubble(item: FoodCreateInput): FlexBubble {
     const flexBubble: FlexBubble = {
       type: 'bubble',
       size: 'kilo',
