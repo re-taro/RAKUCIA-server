@@ -1,10 +1,17 @@
 {
   "name": "rakucia-server",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "description": "RAKUCIA's server",
+  "author": {
+    "name": "Rintaro Itokawa",
+    "email": "me@re-taro.dev",
+    "url": "https://www.re-taro.dev/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NIT-Toba-Hackathon2022/RAKUCIA-server"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
