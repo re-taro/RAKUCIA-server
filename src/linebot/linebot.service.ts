@@ -8,12 +8,14 @@ import { LinebotConfigService } from './linebot.config.service';
 import { richMenu } from './linebot.data';
 import { chooseFoodCategory, throwIdFromCategory, throwNameFromCategory, fetchData } from '../food/food.dto';
 import { FoodCreateInput } from '../food/food.input';
+import { FoodService } from '../food/food.service';
 
 @Injectable()
 export class LinebotService {
   constructor(
     private readonly linebotConfigService: LinebotConfigService,
     private readonly configService: ConfigService,
+    private readonly foodService: FoodService,
   ) {}
 
   postBackHandler(event: PostbackEvent) {
@@ -33,6 +35,150 @@ export class LinebotService {
       case 'soup':
         const soup = ['miso', 'ton', 'vegetable', 'vermicelli'];
         this.chooseFoodCategory(event.replyToken, soup);
+        break;
+      case '0,10-277':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '0,10-276':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '0,10-275':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '0,10-278':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '0,11-70':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '0,11-75':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '0,11-72':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '0,11-74':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '0,17-159':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '0,17-161':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '0,17-169':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '0,17-164-1369':
+        this.addFood(0, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,10-277':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,10-276':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,10-275':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,10-278':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,11-70':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,11-75':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,11-72':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,11-74':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,17-159':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,17-161':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,17-169':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '1,17-164-1369':
+        this.addFood(1, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,10-277':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,10-276':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,10-275':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,10-278':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,11-70':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,11-75':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,11-72':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,11-74':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,17-159':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,17-161':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,17-169':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '2,17-164-1369':
+        this.addFood(2, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,10-277':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,10-276':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,10-275':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,10-278':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,11-70':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,11-75':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,11-72':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,11-74':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,17-159':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,17-161':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,17-169':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
+        break;
+      case '3,17-164-1369':
+        this.addFood(3, event.source.userId, event.postback.data.split(',')[1]);
         break;
       case event.postback.data as chooseFoodCategory:
         const id = throwIdFromCategory(event.postback.data);
@@ -62,7 +208,7 @@ export class LinebotService {
         type: 'text',
         text: '食べ物を選択してね',
       },
-      this.createFoodMessage(items),
+      this.createFoodMessage(items, id),
     ]);
   }
 
@@ -87,6 +233,12 @@ export class LinebotService {
     return foods;
   }
 
+  async addFood(index: number, user_id: string, id: string): Promise<void> {
+    const data = await this.apiRequest(id, user_id);
+    const food = data[index];
+    this.foodService.addFood(food);
+  }
+
   async setRichMenu(): Promise<void> {
     const client = new Client(this.linebotConfigService.createLinebotOptions());
     const richMenuId = await client.createRichMenu(richMenu);
@@ -95,13 +247,13 @@ export class LinebotService {
     await client.createRichMenu(richMenu);
   }
 
-  createFoodMessage(items: FoodCreateInput[]): FlexMessage {
+  createFoodMessage(items: FoodCreateInput[], id: string): FlexMessage {
     const flexMessage: FlexMessage = {
       type: 'flex',
       altText: '食べ物の一覧',
       contents: {
         type: 'carousel',
-        contents: items.map((item) => this.createFoodBubble(item)),
+        contents: items.map((item, index) => this.createFoodBubble(item, index, id)),
       },
     };
     return flexMessage;
@@ -116,7 +268,7 @@ export class LinebotService {
     return flexMessage;
   }
 
-  createFoodBubble(item: FoodCreateInput): FlexBubble {
+  createFoodBubble(item: FoodCreateInput, index: number, id: string): FlexBubble {
     const flexBubble: FlexBubble = {
       type: 'bubble',
       size: 'kilo',
@@ -153,8 +305,8 @@ export class LinebotService {
             action: {
               type: 'postback',
               label: '食べたい！',
-              data: `${item}`,
-              displayText: `${item.recipe_title} を追加しました`,
+              data: `${index},${id}`,
+              displayText: `${item.recipe_title} を追加します`,
             },
             style: 'primary',
             color: '#EFBA52',
