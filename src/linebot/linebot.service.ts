@@ -8,14 +8,14 @@ import { LinebotConfigService } from './linebot.config.service';
 import { richMenu } from './linebot.data';
 import { chooseFoodCategory, throwIdFromCategory, throwNameFromCategory, fetchData } from '../food/food.dto';
 import { FoodCreateInput } from '../food/food.input';
-import { FoodService } from '../food/food.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class LinebotService {
   constructor(
     private readonly linebotConfigService: LinebotConfigService,
     private readonly configService: ConfigService,
-    private readonly foodService: FoodService,
+    private readonly prisma: PrismaService,
   ) {}
 
   postBackHandler(event: PostbackEvent) {
@@ -212,6 +212,28 @@ export class LinebotService {
     ]);
   }
 
+  sendShoppingList(user_id: string, list: string, recipe: string): Promise<MessageAPIResponseBase> {
+    const client = new Client(this.linebotConfigService.createLinebotOptions());
+    return client.pushMessage(user_id, [
+      {
+        type: 'text',
+        text: '買い物リストです参考にしてみてください。',
+      },
+      {
+        type: 'text',
+        text: list,
+      },
+      {
+        type: 'text',
+        text: '詳しいレシピなどはこちらから',
+      },
+      {
+        type: 'text',
+        text: recipe,
+      },
+    ]);
+  }
+
   async apiRequest(id: string, user_id: string): Promise<FoodCreateInput[]> {
     const url = `https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20170426?format=json&formatVersion=2&categoryId=${id}&applicationId=${this.configService.get<string>(
       'RAKUTEN_ID',
@@ -236,7 +258,9 @@ export class LinebotService {
   async addFood(index: number, user_id: string, id: string): Promise<void> {
     const data = await this.apiRequest(id, user_id);
     const food = data[index];
-    this.foodService.addFood(food);
+    await this.prisma.food.create({
+      data: food,
+    });
   }
 
   async setRichMenu(): Promise<void> {
