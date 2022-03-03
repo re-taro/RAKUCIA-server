@@ -1,10 +1,17 @@
 {
   "name": "rakucia-server",
-  "version": "0.0.1",
-  "description": "",
-  "author": "",
-  "private": true,
-  "license": "UNLICENSED",
+  "version": "1.0.0",
+  "description": "RAKUCIA's server",
+  "author": {
+    "name": "Rintaro Itokawa",
+    "email": "me@re-taro.dev",
+    "url": "https://www.re-taro.dev/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NIT-Toba-Hackathon2022/RAKUCIA-server"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -22,14 +29,16 @@
     "postinstall": "husky install"
   },
   "dependencies": {
+    "@line/bot-sdk": "^7.4.0",
     "@nestjs/apollo": "^10.0.4",
     "@nestjs/common": "^8.0.0",
+    "@nestjs/config": "^1.2.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/graphql": "^10.0.4",
     "@nestjs/platform-express": "^8.0.0",
-    "@nestjs/platform-fastify": "^8.3.1",
     "@prisma/client": "^3.9.2",
-    "apollo-server-fastify": "^3.6.3",
+    "apollo-server-express": "^3.6.3",
+    "axios": "^0.26.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "graphql": "^16.3.0",

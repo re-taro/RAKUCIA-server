@@ -2,16 +2,27 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Food } from './food.model';
 import { FoodCreateInput, FoodUpdateInput } from './food.input';
+import { LinebotService } from '../linebot/linebot.service';
 
 @Injectable()
 export class FoodService {
-  constructor(private readonly prisma: PrismaService) {}
-  // TODO: これはデバッグ用です
-  async findAll(): Promise<Food[]> {
-    return this.prisma.food.findMany();
-  }
+  constructor(private readonly prisma: PrismaService, private readonly linebot: LinebotService) {}
 
   async createList(user_id: string): Promise<Food[]> {
+    const foods = await this.prisma.food.findMany({
+      where: {
+        user_id,
+      },
+    });
+    const list = foods
+      .filter((food) => food.add_to_list === 1)
+      .map((food) => food.recipe_material)
+      .filter((x, i, self) => self.indexOf(x) === i)
+      .join(',')
+      .split(',')
+      .join('\n');
+    const recipe = foods.map((food) => food.recipe_url).join('\n');
+    this.linebot.sendShoppingList(user_id, list, recipe);
     return this.prisma.food.findMany({
       where: {
         user_id,

@@ -38,5 +38,4 @@ type Mutation {
 
 type Query {
   createList(user_id: String!): [Food!]!
-  foods: [Food!]!
 }
