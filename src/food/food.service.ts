@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Food } from './food.model';
 import { FoodCreateInput, FoodUpdateInput } from './food.input';
-import { validateString } from './food.dto';
 import { LinebotService } from '../linebot/linebot.service';
 
 @Injectable()
