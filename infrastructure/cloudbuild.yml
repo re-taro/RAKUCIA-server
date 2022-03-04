@@ -54,6 +54,7 @@ steps:
       - --update-secrets=RAKUTEN_SECRET=RAKUTEN_SECRET:latest
       - --update-secrets=CHANNEL_ACCESS_TOKEN=CHANNEL_ACCESS_TOKEN:latest
       - --update-secrets=CHANNEL_SECRET=CHANNEL_SECRET:latest
+    secretEnv: ["RAKUTEN_ID", "RAKUTEN_SECRET", "CHANNEL_ACCESS_TOKEN", "CHANNEL_SECRET"]
     waitFor: ["apply-migrations"]
 timeout: 2000s
 substitutions:
