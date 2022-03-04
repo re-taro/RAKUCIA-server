@@ -16,7 +16,7 @@ resource "google_cloudbuild_trigger" "deploy-app" {
     }
   }
   included_files = ["rakucia-server/**"]
-  filename       = "rakucia-server/infrastructure/cloudbuild.yml"
+  filename       = "infrastructure/cloudbuild.yml"
   substitutions = {
     _REGION                         = var.region
     _CLOUDSQL_INSTANCE_FULL_NAME    = var.cloudsql_instance_full_name
