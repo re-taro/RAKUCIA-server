@@ -36,7 +36,7 @@ module "cloud-build" {
   source                      = "./modules/cloud-build"
   gcp_project_id              = var.gcp_project_id
   region                      = var.primary_region
-  cloudsql_instance_full_name = module.cloud-sql.blog_training_db_connection_name
+  cloudsql_instance_full_name = module.cloud-sql.database_connection_name
   backend_app_name            = local.backend_app_name
   github_owner                = "NIT-Toba-Hackathon2022"
   github_app_repo_name        = "RAKUCIA-server"

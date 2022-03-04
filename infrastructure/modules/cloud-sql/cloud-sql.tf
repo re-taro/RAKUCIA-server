@@ -5,8 +5,8 @@ variable "target_region" {
 }
 
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database
-resource "google_sql_database_instance" "db" {
-  name                = "db"
+resource "google_sql_database_instance" "database" {
+  name                = "database"
   database_version    = "mysql_5_7"
   region              = var.target_region
   deletion_protection = false
@@ -23,12 +23,12 @@ resource "google_sql_database_instance" "db" {
   }
 }
 
-resource "google_sql_database" "db" {
-  name     = "blog_training_db"
-  instance = google_sql_database_instance.db.name
+resource "google_sql_database" "database" {
+  name     = "database"
+  instance = google_sql_database_instance.database.name
 }
 
 # ref: https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/sql_database_instance#attributes-reference
-output "blog_training_db_connection_name" {
-  value = google_sql_database_instance.db.connection_name
+output "database_connection_name" {
+  value = google_sql_database_instance.database.connection_name
 }
