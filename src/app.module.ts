@@ -18,7 +18,7 @@ import { LinebotConfigService } from './linebot/linebot.config.service';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       sortSchema: true,
       debug: process.env.NODE_ENV === 'production' ? false : true,
-      playground: process.env.NODE_ENV === 'production' ? false : true,
+      //playground: process.env.NODE_ENV === 'production' ? false : true, TODO: すぐに消す
       cors: {
         origin: process.env.ORIGINS?.split(','),
         credentials: true,
