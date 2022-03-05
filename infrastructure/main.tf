@@ -31,7 +31,6 @@ module "cloud-sql" {
 
 # Cloud Build
 # マイグレーション＋バックエンドデプロイ
-# フロントエンドデプロイ
 module "cloud-build" {
   source                      = "./modules/cloud-build"
   gcp_project_id              = var.gcp_project_id
