@@ -49,12 +49,12 @@ steps:
       - --no-cpu-throttling
       - --ingress=all
       - --set-env-vars=GCP_PROJECT_ID=$PROJECT_ID
+      - --update-secrets=PORT=PORT:latest
       - --update-secrets=DATABASE_URL=DATABASE_URL:latest
       - --update-secrets=RAKUTEN_ID=RAKUTEN_ID:latest
       - --update-secrets=RAKUTEN_SECRET=RAKUTEN_SECRET:latest
       - --update-secrets=CHANNEL_ACCESS_TOKEN=CHANNEL_ACCESS_TOKEN:latest
       - --update-secrets=CHANNEL_SECRET=CHANNEL_SECRET:latest
-    secretEnv: ["RAKUTEN_ID", "RAKUTEN_SECRET", "CHANNEL_ACCESS_TOKEN", "CHANNEL_SECRET"]
     waitFor: ["apply-migrations"]
 timeout: 2000s
 substitutions:
@@ -74,6 +74,8 @@ availableSecrets:
       env: CHANNEL_ACCESS_TOKEN
     - versionName: projects/$PROJECT_ID/secrets/CHANNEL_SECRET/versions/latest
       env: CHANNEL_SECRET
+    - versionName: projects/$PROJECT_ID/secrets/PORT/versions/latest
+      env: PORT
 
 # https://cloud.google.com/build/docs/building/build-containers
 images:
