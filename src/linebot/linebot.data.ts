@@ -18,7 +18,7 @@ export const richMenu: RichMenu = {
       },
       action: {
         type: 'uri',
-        uri: 'https://liff.line.me/1656947920-BZXEZp8D',
+        uri: process.env.LIFF_URL,
       },
     },
     {
