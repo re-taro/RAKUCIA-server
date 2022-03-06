@@ -4,14 +4,14 @@ services:
   db:
     image: mysql:5.7
     env_file:
-      - ./docker/dev/mysql.env
+      - ./sql/mysql.env
     container_name: "database"
     restart: "no"
     ports:
       - 3306:3306
     volumes:
-      - ./docker/dev/conf/mysql.cnf:/etc/mysql/conf.d/mysql.conf.cnf
-      - ./docker/dev/data:/var/lib/mysql
+      - ./sql/conf/mysql.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./sql/data:/var/lib/mysql
     networks:
       - overlay
 

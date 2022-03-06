@@ -7,6 +7,10 @@ import { LinebotService } from '../linebot/linebot.service';
 @Injectable()
 export class FoodService {
   constructor(private readonly prisma: PrismaService, private readonly linebot: LinebotService) {}
+  // デバッグ用です
+  async findAll(): Promise<Food[]> {
+    return this.prisma.food.findMany();
+  }
 
   async createList(user_id: string): Promise<Food[]> {
     const foods = await this.prisma.food.findMany({

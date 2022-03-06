@@ -18,7 +18,7 @@ export const richMenu: RichMenu = {
       },
       action: {
         type: 'uri',
-        uri: 'https://www.re-taro.dev/', //TODO: リンク先をLIFFに変更
+        uri: process.env.LIFF_URL,
       },
     },
     {
