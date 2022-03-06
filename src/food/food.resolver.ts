@@ -6,6 +6,11 @@ import { FoodCreateInput, FoodUpdateInput } from './food.input';
 @Resolver()
 export class FoodResolver {
   constructor(private readonly foodService: FoodService) {}
+  // これはデバッグ用です
+  @Query(() => [Food], { name: 'foods' })
+  findAll(): Promise<Food[]> {
+    return this.foodService.findAll();
+  }
 
   @Query(() => [Food], { name: 'createList' })
   createList(@Args('user_id') user_id: string): Promise<Food[]> {
